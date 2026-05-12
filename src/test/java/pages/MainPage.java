@@ -29,18 +29,8 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//div[contains(@class, 'tab_tab') and span[text()='Начинки']]")
     private WebElement fillingsTab;
 
-    @FindBy(xpath = "//h2[text()='Булки']")
-    private WebElement bunsHeader;
-
-    @FindBy(xpath = "//h2[text()='Соусы']")
-    private WebElement saucesHeader;
-
-    @FindBy(xpath = "//h2[text()='Начинки']")
-    private WebElement fillingsHeader;
-
     public MainPage(WebDriver driver) {
         super(driver);
-        // Не ждём ничего в конструкторе – ожидания будут только в методах
     }
 
     public void clickLoginButtonOnMain() {
@@ -73,52 +63,28 @@ public class MainPage extends BasePage {
 
     public void clickBunsTab() {
         click(bunsTab);
-        waitForBunsSectionVisible();
+        wait.until(ExpectedConditions.attributeContains(bunsTab, "class", "tab_tab_type_current"));
     }
 
     public void clickSaucesTab() {
         click(saucesTab);
-        waitForSaucesSectionVisible();
+        wait.until(ExpectedConditions.attributeContains(saucesTab, "class", "tab_tab_type_current"));
     }
 
     public void clickFillingsTab() {
         click(fillingsTab);
-        waitForFillingsSectionVisible();
+        wait.until(ExpectedConditions.attributeContains(fillingsTab, "class", "tab_tab_type_current"));
     }
 
-    public void waitForBunsSectionVisible() {
-        wait.until(ExpectedConditions.visibilityOf(bunsHeader));
+    public boolean isBunsTabActive() {
+        return bunsTab.getAttribute("class").contains("tab_tab_type_current");
     }
 
-    public void waitForSaucesSectionVisible() {
-        wait.until(ExpectedConditions.visibilityOf(saucesHeader));
+    public boolean isSaucesTabActive() {
+        return saucesTab.getAttribute("class").contains("tab_tab_type_current");
     }
 
-    public void waitForFillingsSectionVisible() {
-        wait.until(ExpectedConditions.visibilityOf(fillingsHeader));
-    }
-
-    public boolean isBunsSectionVisible() {
-        try {
-            return bunsHeader.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean isSaucesSectionVisible() {
-        try {
-            return saucesHeader.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean isFillingsSectionVisible() {
-        try {
-            return fillingsHeader.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
+    public boolean isFillingsTabActive() {
+        return fillingsTab.getAttribute("class").contains("tab_tab_type_current");
     }
 }

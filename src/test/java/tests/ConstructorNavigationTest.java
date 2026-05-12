@@ -17,9 +17,11 @@ public class ConstructorNavigationTest extends BaseTest {
     @Step("Тест: переход к разделу «Булки»")
     public void switchToBunsTest() {
         MainPage mainPage = new MainPage(driver);
+        // Переключаемся на соусы, чтобы гарантированно уйти с булок
         mainPage.clickSaucesTab();
+        // Теперь возвращаемся на булки
         mainPage.clickBunsTab();
-        assertTrue(mainPage.isBunsSectionVisible(), "Раздел «Булки» не отображается");
+        assertTrue(mainPage.isBunsTabActive(), "Раздел «Булки» не активен");
     }
 
     @Test
@@ -27,7 +29,7 @@ public class ConstructorNavigationTest extends BaseTest {
     public void switchToSaucesTest() {
         MainPage mainPage = new MainPage(driver);
         mainPage.clickSaucesTab();
-        assertTrue(mainPage.isSaucesSectionVisible(), "Раздел «Соусы» не отображается");
+        assertTrue(mainPage.isSaucesTabActive(), "Раздел «Соусы» не активен");
     }
 
     @Test
@@ -35,6 +37,6 @@ public class ConstructorNavigationTest extends BaseTest {
     public void switchToFillingsTest() {
         MainPage mainPage = new MainPage(driver);
         mainPage.clickFillingsTab();
-        assertTrue(mainPage.isFillingsSectionVisible(), "Раздел «Начинки» не отображается");
+        assertTrue(mainPage.isFillingsTabActive(), "Раздел «Начинки» не активен");
     }
 }
